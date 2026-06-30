@@ -19,6 +19,7 @@ var camera_pitch: float = 0.0
 var target_velocity = Vector3.ZERO
 @onready var head: Node3D = $Arms
 @onready var anim_player: AnimationPlayer = $Arms/AnimationPlayer
+@onready var running: AudioStreamPlayer3D = $Running
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -49,7 +50,7 @@ func _physics_process(delta: float) -> void:
 		moveDir.z -= 1
 	if Input.is_action_pressed("move_Forward"):
 		moveDir.z += 1
-
+	
 	# Only let movement control animation when NOT attacking
 	if not is_attacking:
 		if moveDir == Vector3.ZERO:
@@ -57,7 +58,15 @@ func _physics_process(delta: float) -> void:
 		else:
 			moveDir = moveDir.normalized()
 			anim_player.play("CharacterArmature|Sword_Walk")
+	
+	if moveDir != Vector3.ZERO and is_on_floor():
+		if not running.playing:
+			running.play()
+	else:
+		if running.playing:
+			running.stop()
 
+		
 	var direction = (transform.basis * moveDir)
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
