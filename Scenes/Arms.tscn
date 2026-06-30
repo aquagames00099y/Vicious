@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cj1ok25yhmaq8" path="res://Prefabs/Steel Shortsword.fbx" id="2_tx8q2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tx8q2"]
+albedo_color = Color(0.4590115, 0.5145838, 0.55621403, 1)
 
 [node name="Arms" unique_id=409421434 instance=ExtResource("1_tx8q2")]
 
