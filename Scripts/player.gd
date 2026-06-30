@@ -20,6 +20,7 @@ var target_velocity = Vector3.ZERO
 @onready var head: Node3D = $Arms
 @onready var anim_player: AnimationPlayer = $Arms/AnimationPlayer
 @onready var running: AudioStreamPlayer3D = $Running
+@onready var jumping: AudioStreamPlayer3D = $Jumping
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -76,6 +77,7 @@ func _physics_process(delta: float) -> void:
 
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		target_velocity.y = jump_impulse
+		jumping.play()
 
 	velocity = target_velocity
 	move_and_slide()
