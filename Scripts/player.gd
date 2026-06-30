@@ -43,13 +43,13 @@ func _physics_process(delta: float) -> void:
 		moveDir.z -= 1
 	if Input.is_action_pressed("move_Forward"):
 		moveDir.z += 1
-	
-	if moveDir == Vector3.ZERO:
-		anim_player.play("CharacterArmature|Fists_Idle")
-	
-	if moveDir != Vector3.ZERO:
-		moveDir = moveDir.normalized()
-		anim_player.play("CharacterArmature|Sword_Walk")
+		
+	if anim_player.current_animation != "CharacterArmature|Sword_Slash1":
+		if moveDir == Vector3.ZERO:
+			anim_player.play("CharacterArmature|Fists_Idle")
+		else:
+			moveDir = moveDir.normalized()
+			anim_player.play("CharacterArmature|Sword_Walk")
 		
 		# $CharacterArmature.basis = basis.looking_at(moveDir)
 
@@ -70,3 +70,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 		
 		
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("Attack"):
+		anim_player.play("CharacterArmature|Sword_Slash1")

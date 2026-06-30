@@ -3,9 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://b7e22k24ts8nj" path="res://Prefabs/Arms.fbx" id="1_tx8q2"]
 [ext_resource type="PackedScene" uid="uid://cj1ok25yhmaq8" path="res://Prefabs/Steel Shortsword.fbx" id="2_tx8q2"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tx8q2"]
+
 [node name="Arms" unique_id=409421434 instance=ExtResource("1_tx8q2")]
 
-[node name="Skeleton3D" parent="CharacterArmature" parent_id_path=PackedInt32Array(2067851524) index="0" unique_id=1485030154]
+[node name="Skeleton3D" parent="CharacterArmature" parent_id_path=PackedInt32Array(1909588434) index="0" unique_id=759239374]
 bones/1/rotation = Quaternion(0.8460074, 0.46808594, 0.20944457, -0.1459452)
 bones/1/scale = Vector3(0.99999976, 0.9999998, 0.99999976)
 bones/2/position = Vector3(1.855095e-08, 0.06346611, 9.265831e-09)
@@ -141,8 +143,15 @@ bones/55/position = Vector3(1.1348166e-07, 0.03208014, 9.925063e-09)
 bones/55/rotation = Quaternion(-0.46607867, -0.45427853, -0.17456576, 0.73886985)
 bones/55/scale = Vector3(1, 0.9999999, 0.99999994)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2" unique_id=1796380578]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 4.656613e-10, 1.4901161e-08)
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="CharacterArmature/Skeleton3D" index="1" unique_id=1715164349]
+transform = Transform3D(-0.002260238, -0.33628273, -0.94175875, -0.07946073, -0.93872225, 0.3353892, -0.9968353, 0.075591005, -0.02459976, -0.2509539, -0.3010802, -0.2023411)
+bone_name = "Wrist.R"
+bone_idx = 32
 
-[node name="Steel Shortsword" parent="MeshInstance3D" index="0" unique_id=361074086 instance=ExtResource("2_tx8q2")]
-transform = Transform3D(-4.371139e-08, 0, -1, -0.21115424, 0.9774529, 9.229844e-09, 0.9774529, 0.21115424, -4.272582e-08, -0.23435465, -0.16946054, 0.49595273)
+[node name="Steel Shortsword" parent="CharacterArmature/Skeleton3D/BoneAttachment3D" index="0" unique_id=361074086 instance=ExtResource("2_tx8q2")]
+transform = Transform3D(0.28815538, -0.9575809, 0.002260051, 0.9015956, 0.27210188, 0.33628243, -0.32263282, -0.094863795, 0.94175804, -0.021862507, 0.10214725, -0.0540559)
+
+[node name="Steel Shortsword" parent="CharacterArmature/Skeleton3D/BoneAttachment3D/Steel Shortsword" index="0" unique_id=1257694902]
+material_override = SubResource("StandardMaterial3D_tx8q2")
+
+[editable path="CharacterArmature/Skeleton3D/BoneAttachment3D/Steel Shortsword"]
